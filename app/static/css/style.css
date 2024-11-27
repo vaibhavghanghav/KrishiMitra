@@ -1,0 +1,252 @@
+html,
+body {
+    margin: 0;
+    font-size: 100%;
+    background: #f8f9fa; /* Light gray background */
+	font-family: 'Arial', sans-serif; /* Use a standard font */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body a {
+    text-decoration: none;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+	font-family: 'Arial', sans-serif;
+}
+
+body img {
+    max-width: 100%;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="text"],
+input[type="email"],
+input[type="search"] {
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+	color: #333; /* Dark gray text */
+}
+li {
+    list-style-type: none;
+}
+
+p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.6em; /* Improved line spacing */
+    letter-spacing: 1px;
+    color: #555; /* Slightly darker gray text */
+    font-weight: 400; /* Regular font weight */
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+
+/*-- header --*/
+
+header {
+    position: absolute;
+    z-index: 9;
+    width: 100%;
+    background-color: #007bff; /* Blue header */
+    color: white;
+    padding: 1rem 0;
+}
+
+.toggle,
+[id^=drop] {
+	display: none;
+}
+
+nav { 
+	margin:0;
+	padding: 0;
+}
+
+#logo a {
+	float: left;
+    font-size: 1.2em;
+    display: initial;
+    margin: 0;
+    letter-spacing: 1px;
+    color: white;
+    font-weight: 600;
+    padding: 3px 0;
+    border: none;
+}
+#logo a span.fa {
+    color: #e8cd30;
+}
+
+nav:after {
+	content:"";
+	display:table;
+	clear:both;
+}
+
+nav ul {
+	float: right;
+	padding:0;
+	margin:0;
+	list-style: none;
+	position: relative;
+	}
+	
+nav ul li {
+	margin: 0px;
+	display:inline-block;
+	}
+
+nav a {
+    color: white;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    padding: 10px 0;
+    font-weight: 700;
+}
+
+
+nav ul li ul li:hover { background: #f8f9fa; }
+
+nav a:hover { 
+	color: white;
+}
+.menu li.active  a{ 
+	color: white;
+}
+
+nav ul ul {
+	display: none;
+	position: absolute; 
+	top: 30px; 
+    background: white;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Add a subtle shadow */
+}
+	
+nav ul li:hover > ul {
+	display:inherit;
+}
+	
+nav ul ul li {
+	width:170px;
+	float:none;
+	display:list-item;
+	position: relative;
+}
+nav ul ul li a {
+    color: #333;
+    padding: 5px 10px;
+    display: block;
+}
+nav ul li span {
+    color: white;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+ul.menu li span.fa {
+    color: #e8cd30;
+}
+
+nav ul ul ul li {
+	position: relative;
+	top:-60px;
+	left:170px; 
+}
+
+li > a:only-child:after { content: ''; }
+
+
+/* Media Queries (adjust as needed) */
+
+@media all and (max-width : 991px) {
+	/* ... (Existing media query content) ... */
+}
+
+/* ... (Rest of the existing CSS) ... */
+
+/* Add some basic form styling */
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+	max-height: fit-content;
+}
+
+input[type="range"],
+select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0069d9;
+}
+
+/*Slider Styling*/
+.slider-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.slider-container label {
+    flex: 0 0 150px; /* Fixed width for labels */
+    text-align: right;
+    margin-right: 10px;
+}
+
+.slider-container input[type="range"] {
+    flex: 1; /* Takes remaining space */
+}
+
+.slider-value {
+    margin-left: 10px;
+}

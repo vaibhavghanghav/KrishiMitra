@@ -1,0 +1,152 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<style>
+  /* General Styles */
+  body {
+    background-color: #f5f7fa;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h1, h2, h3 {
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-top: 20px;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  ul {
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+
+  ul li {
+    margin-bottom: 5px;
+  }
+
+  .api-data, .recommendation-info {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+  }
+
+  .api-data p, .recommendation-info p, .recommendation-info ul {
+    margin-bottom: 10px;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3498db;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #2980b9;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.75rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+
+    .container {
+      padding: 15px;
+    }
+  }
+</style>
+
+<div class="container">
+  <!-- Crop Recommendation -->
+  <h2>पिक शिफारस</h2>
+  <p><b>{{ city }}</b>, <b>{{ state }}</b> साठी सर्वोत्तम पीक आहे:</p>
+  <h1>{{ prediction }}</h1>
+
+  <!-- Weather API Data -->
+  <div class="api-data">
+    <h3>हवामान माहिती</h3>
+    <p><strong>शहर:</strong> {{ city }}</p>
+    <p><strong>तापमान:</strong> {{ weather.temperature }}°C</p>
+    <p><strong>आर्द्रता:</strong> {{ weather.humidity }}%</p>
+  </div>
+
+
+
+  <!-- Additional Recommendations -->
+  <div class="recommendation-info">
+    <h3>पीक योग्यतेचे मूल्यांकन</h3>
+    {% if weather.temperature >= 20 and weather.temperature <= 30 %}
+      <p>तापमान <b>{{ prediction }}</b> वाढवण्यासाठी आदर्श आहे. उत्तम वाढीसाठी योग्य पाणी देणे सुनिश्चित करा.</p>
+    {% elif weather.temperature < 20 %}
+      <p>तापमान <b>{{ prediction }}</b> साठी थोडे कमी आहे. संरक्षणासाठी मल्चिंग किंवा ग्रीनहाउस संरचना वापरण्याचा विचार करा.</p>
+    {% else %}
+      <p>तापमान <b>{{ prediction }}</b> साठी आदर्श श्रेणीपेक्षा जास्त आहे. योग्य पाणी आणि सावलीच्या जाळ्या वापरून उष्णतेच्या ताणास सामोरे जा.</p>
+    {% endif %}
+
+    {% if weather.humidity >= 50 and weather.humidity <= 70 %}
+      <p>आर्द्रता पातळी <b>{{ prediction }}</b> साठी उपयुक्त आहे. योग्य मातीच्या ओलाव्यासाठी पाणी दिले पाहिजे.</p>
+    {% else %}
+      <p>आर्द्रता पातळी <b>{{ prediction }}</b> साठी आदर्श श्रेणीच्या बाहेर आहे. त्यानुसार सिंचन पद्धतीत बदल करा.</p>
+    {% endif %}
+
+    <h3>{{ prediction }} बद्दल अतिरिक्त माहिती</h3>
+    <ul>
+      <li><strong>आदर्श तापमान श्रेणी:</strong> 20°C - 30°C</li>
+      <li><strong>मातीचा प्रकार:</strong> चांगली निचरलेली, सुपीक माती, pH 6.0 ते 6.5</li>
+      <li><strong>पाणी आवश्यकता:</strong> मापदंड, पाणी जास्त होणार नाही याची काळजी घ्या</li>
+      <li><strong>वाढीचा कालावधी:</strong> 6–9 महिने</li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

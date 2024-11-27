@@ -1,0 +1,216 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<style>
+  body {
+    background-color: #f5f5f5;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 30px;
+  }
+
+  .slider-container label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+
+  .slider-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+  }
+
+  .slider-container input[type='range'] {
+    -webkit-appearance: none;
+    width: 50%; /* Shorter width for compact look */
+    height: 10px;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+    outline: none;
+    opacity: 0.9;
+    transition: opacity 0.2s ease-in-out;
+    margin-top: 5px;
+    cursor: pointer;
+  }
+
+  .slider-container input[type='range']::-webkit-slider-thumb,
+  .slider-container input[type='range']::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #007bff;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .slider-value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin-left: 10px;
+  }
+</style>
+
+<!-- Nitrogen Slider -->
+<form method="POST" action="{{ url_for('crop_prediction') }}">
+<div class="form-group slider-container">
+  <label for="Nitrogen"><b>Nitrogen (in mg/L)</b></label>
+  <div class="slider-description">नायट्रोजन (मिलीग्राम प्रति लिटर)</div>
+  <input
+    type="range"
+    id="Nitrogen"
+    name="nitrogen"
+    min="0"
+    max="140"
+    step="1"
+    value="50"
+    oninput="document.getElementById('nitrogen-value').innerText = this.value"
+  />
+  <div id="nitrogen-value" class="slider-value">50</div>
+</div>
+
+<!-- Phosphorous Slider -->
+<div class="form-group slider-container">
+  <label for="Phosphorous"><b>Phosphorous (in mg/L)</b></label>
+  <div class="slider-description">फॉस्फरस (मिलीग्राम प्रति लिटर)</div>
+  <input
+    type="range"
+    id="Phosphorous"
+    name="phosphorous"
+    min="5"
+    max="145"
+    step="1"
+    value="50"
+    oninput="document.getElementById('phosphorous-value').innerText = this.value"
+  />
+  <div id="phosphorous-value" class="slider-value">50</div>
+</div>
+
+<!-- Potassium Slider -->
+<div class="form-group slider-container">
+  <label for="Potassium"><b>Potassium (in mg/L)</b></label>
+  <div class="slider-description">पोटॅशियम (मिलीग्राम प्रति लिटर)</div>
+  <input
+    type="range"
+    id="Potassium"
+    name="potassium"
+    min="5"
+    max="205"
+    step="1"
+    value="50"
+    oninput="document.getElementById('potassium-value').innerText = this.value"
+  />
+  <div id="potassium-value" class="slider-value">50</div>
+</div>
+
+<!-- pH Slider -->
+<div class="form-group slider-container">
+  <label for="pH"><b>pH Level</b></label>
+  <div class="slider-description">पीएच पातळी</div>
+  <input
+    type="range"
+    id="pH"
+    name="ph"
+    min="3.5"
+    max="9.9"
+    step="0.1"
+    value="7"
+    oninput="document.getElementById('ph-value').innerText = this.value"
+  />
+  <div id="ph-value" class="slider-value">7.0</div>
+</div>
+
+<!-- Rainfall Slider -->
+<div class="form-group slider-container">
+  <label for="Rainfall"><b>Rainfall (in mm)</b></label>
+  <div class="slider-description">पर्जन्यमान (मिलीमीटर)</div>
+  <input
+    type="range"
+    id="Rainfall"
+    name="rainfall"
+    min="20"
+    max="298"
+    step="1"
+    value="100"
+    oninput="document.getElementById('rainfall-value').innerText = this.value"
+  />
+  <div id="rainfall-value" class="slider-value">100</div>
+</div>
+
+<div class="form-group">
+  <div class="form-group slider-container">
+    <!-- State Dropdown -->
+    <label for="State"><b>राज्य (State)</b></label>
+    <div class="slider-description">राज्य निवडा</div>
+    <select
+      onchange="print_city('state', this.selectedIndex);"
+      id="sts"
+      name="stt"
+      class="form-control"
+      style="
+        font-weight: bold;
+        color: black;
+        width: 50%;
+        height: 40px;
+        border-radius: 5px;
+      "
+      required
+    ></select>
+  </div>
+  
+  <div class="form-group slider-container">
+    <!-- City Dropdown -->
+    <label for="City"><b>शहर (City)</b></label>
+    <div class="slider-description">शहर निवडा</div>
+    <select
+      id="state"
+      name="city"
+      class="form-control"
+      style="
+        font-weight: bold;
+        color: black;
+        width: 50%;
+        height: 40px;
+        border-radius: 5px;
+      "
+      required
+    ></select>
+  </div>
+  
+
+  <!-- JavaScript Initialization -->
+  <script language="javascript">
+      print_state("sts");
+  </script>
+</div>
+
+<!-- Submit Button -->
+<div class="d-flex justify-content-center">
+  <button
+    type="submit"
+    class="btn btn-info"
+    style="
+      color: black;
+      font-weight: bold;
+      width: 130px;
+      height: 50px;
+      border-radius: 12px;
+      font-size: 21px;
+    "
+  >
+    Predict
+  </button>
+</form>
+</div>
+
+{% endblock %}
